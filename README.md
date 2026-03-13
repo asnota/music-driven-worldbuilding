@@ -389,12 +389,3 @@ This adaptation focuses on:
 * easier **GPU configuration**
 * integration with **XR workflows (Unreal Engine)**
 
----
-
-If you'd like, I can also help you add two **very useful sections that reviewers love**:
-
-* **"Reproducibility for EVA 2026 reviewers"**
-* **"Minimal demo pipeline (5 commands to run the system)"**
-
-These make research repos look **much more professional and citable**.
-
