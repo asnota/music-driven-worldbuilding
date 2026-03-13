@@ -41,13 +41,13 @@ Input (music / prompt / parameters)
         ↓
 Flask Application
         ↓
-Diffusion-based Generation (PyTorch)
+Music Generation (.wav)
         ↓
-HDRI Environment (.hdr)
+HDRI Image Generation (.hdr)
         ↓
 Unreal Engine 5
         ↓
-VR Scene with HDRIBackdrop
+VR Scene with HDRIBackdrop and Niagara system
 ```
 
 ---
@@ -329,18 +329,6 @@ EVA London, 2026
 # License
 
 Research prototype — license to be defined.
-
----
-
-If you'd like, I can also help you create:
-
-* a **much more polished research-lab README (the kind that gets stars on GitHub)**
-* a **diagram of the architecture for the paper**
-* a **GitHub repo structure ready for reviewers and open-source release**.
----
-Here is the **updated README section** you can add to your repository to clearly acknowledge the original work and explain that this project is a **`uv`-based adaptation**. I integrated it in a natural GitHub style (commonly expected in research repos).
-
-You can place this section **after the Project Overview** or **before the License**.
 
 ---
 
