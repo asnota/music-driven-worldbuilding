@@ -4,7 +4,7 @@ This repository contains the prototype implementation supporting the research pa
 
 **“Music-Driven Worldbuilding: Audio-Reactive VR Environments Using Multimodal Generative AI”**
 
-Accepted for presentation at **EVA London 2026 (Electronic Visualisation and the Arts Conference)** as a **15-minute paper presentation**.
+Accepted for presentation at **EVA London 2026 (Electronic Visualisation and the Arts Conference).
 
 The project demonstrates a workflow where **AI-generated HDRI environments** can be created and integrated into **Unreal Engine 5 VR scenes**, enabling experimental **audio-reactive worldbuilding pipelines**.
 
