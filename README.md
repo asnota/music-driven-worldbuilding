@@ -187,8 +187,8 @@ uv run app.py
 
 The Flask service will start locally and will be available at port 500: .
 
-Generated **.hdr panoramic environment maps** will be stored into **generated_panorama_web**. 
-Generated **.wave music files** will be available in **generated_music** folder inside flask-app.
+Generated **.hdr panoramic environment maps** will be stored into `generated_panorama_web`. 
+Generated **.wave music files** will be available in `generated_music` folder inside flask-app.
 
 
 ---
@@ -221,7 +221,8 @@ Search for:
 HDRIBackdrop
 ```
 
-Enable the plugin and restart the project. More information on plugin installation: [https://dev.epicgames.com/documentation/en-us/unreal-engine/hdri-backdrop-visualization-tool-in-unreal-engine](https://dev.epicgames.com/documentation/en-us/unreal-engine/hdri-backdrop-visualization-tool-in-unreal-engine)
+Enable the plugin and restart the project. 
+More information on plugin installation: [https://dev.epicgames.com/documentation/en-us/unreal-engine/hdri-backdrop-visualization-tool-in-unreal-engine](https://dev.epicgames.com/documentation/en-us/unreal-engine/hdri-backdrop-visualization-tool-in-unreal-engine)
 
 ---
 
@@ -275,6 +276,15 @@ inside the HDRIBackdrop actor settings.
 
 ---
 
+## 7. Add Audio to the Scene
+
+1. Import an audio file into the UE5 project (`.wav` file).
+2. Drag the audio asset from the UE5 **Content Browser** into the scene.
+3. The Niagara system included in the scene will automatically react to the audio.
+4. Click **Simulate** in the toolbar to preview the audio-reactive effect.
+
+---
+
 # Research Context
 
 This prototype supports the research project:
@@ -319,9 +329,14 @@ Planned extensions include:
 
 If you use this repository in academic work, please cite:
 
-```
-Music-Driven Worldbuilding: Audio-Reactive VR Environments Using Multimodal Generative AI
-EVA London, 2026
+```bibtex
+@inproceedings{shvets2026music,
+  author    = {Shvets, Anna and Li, Qi and Zhao, Huilai},
+  title     = {Music-Driven Worldbuilding: Audio-Reactive VR Environments Using Multimodal Generative AI},
+  booktitle = {Electronic Visualisation and the Arts (EVA London 2026)},
+  year      = {2026},
+  address   = {London, UK}
+}
 ```
 
 ---
@@ -380,8 +395,8 @@ This adaptation focuses on:
 * Project supervision
 * Case study creation with original music composition
 * Article writing
-* Adaptation of the Flask app generative pipeline to **uv**
-* Adaptation of the **UE6 project template** to HDRIBackdrop
+* Adaptation of the Flask app generative pipeline to `uv`
+* Adaptation of the UE5 project template to HDRIBackdrop
 
 **Qi Li**
 
