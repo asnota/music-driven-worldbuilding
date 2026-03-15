@@ -302,12 +302,15 @@ The work investigates how **AI-generated HDRI environments can serve as building
 # Repository Structure
 
 ```
-flask-app/
+project-root/
+├── flask-app/
+│   ├── app.py
+│   ├── generated_music/
+│   ├── generated_panorama_web/
+│   └── Text2Light/
 │
-├── app.py
-├── generated_music/
-├── generated_panorama_web/
-├── Text2Light/
+├── vr-template/
+│
 └── README.md
 ```
 
