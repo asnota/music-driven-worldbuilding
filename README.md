@@ -4,14 +4,14 @@ This repository contains the prototype implementation supporting the research pa
 
 **“Music-Driven Worldbuilding: Audio-Reactive VR Environments Using Multimodal Generative AI”**
 
-Accepted for presentation at **EVA London 2026 (Electronic Visualisation and the Arts Conference).
+Accepted for presentation at **EVA London 2026 (Electronic Visualisation and the Arts Conference)**.
 
-The project demonstrates a workflow where **AI-generated HDRI environments** can be created and integrated into **Unreal Engine 5 VR scenes**, enabling experimental **audio-reactive worldbuilding pipelines**.
+The project demonstrates a workflow where **AI-generated HDRI environments and music** can be created and integrated into **Unreal Engine 5 VR scenes**, enabling experimental **audio-reactive worldbuilding pipelines**.
 
 The repository includes:
 
 * A **Python/Flask HDRI generation service**
-* A **Diffusion-based generative pipeline**
+* A **Diffusion-based music audio generative pipeline**
 * Integration instructions for **Unreal Engine HDRI environments**
 * A **GPU-accelerated workflow using CUDA + PyTorch**
 
@@ -19,16 +19,15 @@ The repository includes:
 
 # Project Overview
 
-The goal of this project is to explore how **generative AI can be used to produce immersive virtual environments from multimodal inputs**, such as music, text prompts, or symbolic representations.
+The goal of this project is to explore how **generative multimodeal AI can be used to produce immersive virtual environments from multimodal inputs**.
 
-The system generates **HDR panoramic environments (.hdr)** which can then be imported into **Unreal Engine** and used with the **HDRIBackdrop plugin** to create atmospheric VR spaces.
+The system generates **HDR panoramic environments (.hdr)** and **music audio files (.wav)** which can then be imported into **Unreal Engine**. The generated HDRI can then be with the **HDRIBackdrop plugin** to create atmospheric VR spaces, while generated music audio can be mapped to audio-reactive Niagara system, translating audio properties into motion patterns and colour.
 
 Potential applications include:
 
 * AI-assisted **worldbuilding**
 * **music-responsive virtual environments**
-* generative **XR environments**
-* creative tools for **artists and designers**
+* creative tools for **artists and musicians**
 
 ---
 
@@ -67,7 +66,7 @@ Recommended:
 
 * Python **3.11**
 * CUDA-compatible GPU
-* Unreal Engine **5.x**
+* Unreal Engine **5.4** and higher
 
 ---
 
@@ -183,12 +182,14 @@ uv pip install tensorboardX pytorch_lightning
 Once dependencies are installed:
 
 ```
-uv run main.py
+uv run app.py
 ```
 
-The Flask service will start locally and expose endpoints used for **HDRI generation**.
+The Flask service will start locally and will be available at port 500: .
 
-The application will output generated **.hdr panoramic environment maps**.
+Generated **.hdr panoramic environment maps** will be stored into **generated_panorama_web**. 
+Generated **.wave music files** will be available in **generated_music** folder inside flask-app.
+
 
 ---
 
@@ -371,3 +372,34 @@ This adaptation focuses on:
 * easier **GPU configuration**
 * integration with **XR workflows (Unreal Engine)**
 
+Yes — this **kind of section is common and appropriate** in a research project Git repository. It clearly states who contributed what, which is useful for:
+
+* transparency of contributions
+* research attribution (similar to academic papers)
+* helping reviewers or collaborators understand responsibilities
+
+However, a few **language and formatting improvements** would make it clearer and more professional. Right now there are some grammar issues and inconsistent phrasing (e.g., *pipline*, *conceptualisation*, long phrases without separators).
+
+Here is a **cleaned-up version** that would fit well in a README or documentation:
+
+## Contribution to the Research Project
+
+**Anna Shvets**
+
+* Idea conceptualisation
+* Project supervision
+* Case study creation with original music composition
+* Article writing
+* Adaptation of the Flask app generative pipeline to **uv**
+* Adaptation of the **UE6 project template** to HDRIBackdrop
+
+**Qi Li**
+
+* Development of the music generative pipeline for the Flask app
+* Creation of the audio-reactive Niagara system with custom HLSL code translating frequency bands into colour
+* Literature search on generative music and audio
+
+**Huilai Zhao**
+
+* Development of the HDRI generative pipeline for the Flask app
+* Literature search on HDRI generation
