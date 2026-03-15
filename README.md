@@ -128,8 +128,8 @@ uv python pin 3.11
 ## 3. Create the Project
 
 ```
-uv init hdri3
-cd hdri3
+uv init hdri-app
+cd hdri-app
 ```
 
 ---
@@ -196,7 +196,7 @@ The application will output generated **.hdr panoramic environment maps**.
 
 Video reference for workflow:
 
-[https://youtu.be/5TMncLHoawI](https://youtu.be/5TMncLHoawI)
+ToDo
 
 ---
 
@@ -220,7 +220,7 @@ Search for:
 HDRIBackdrop
 ```
 
-Enable the plugin and restart the project.
+Enable the plugin and restart the project. More information on plugin installation: [https://dev.epicgames.com/documentation/en-us/unreal-engine/hdri-backdrop-visualization-tool-in-unreal-engine](https://dev.epicgames.com/documentation/en-us/unreal-engine/hdri-backdrop-visualization-tool-in-unreal-engine)
 
 ---
 
@@ -291,13 +291,12 @@ The work investigates how **AI-generated HDRI environments can serve as building
 # Repository Structure
 
 ```
-hdri3/
+flask-app/
 │
-├── main.py
-├── generation/
-├── models/
-├── outputs/
-├── requirements
+├── app.py
+├── generated_music/
+├── generated_panorama_web/
+├── Text2Light/
 └── README.md
 ```
 
@@ -345,12 +344,7 @@ This project adapts the original implementation by:
 
 * migrating the environment setup to **`uv` for modern Python dependency management**
 * providing a **clean reproducible installation pipeline**
-* integrating the system into a **Flask-based application**
 * adding documentation for **Unreal Engine 5 HDRI workflows**
-* supporting the experimental pipeline described in the research paper:
-
-**“Music-Driven Worldbuilding: Audio-Reactive VR Environments Using Multimodal Generative AI”**
-(EVA London 2026)
 
 All credit for the **original HDRI generation framework and research implementation** goes to the authors of the original repository.
 
