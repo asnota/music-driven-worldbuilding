@@ -372,16 +372,6 @@ This adaptation focuses on:
 * easier **GPU configuration**
 * integration with **XR workflows (Unreal Engine)**
 
-Yes — this **kind of section is common and appropriate** in a research project Git repository. It clearly states who contributed what, which is useful for:
-
-* transparency of contributions
-* research attribution (similar to academic papers)
-* helping reviewers or collaborators understand responsibilities
-
-However, a few **language and formatting improvements** would make it clearer and more professional. Right now there are some grammar issues and inconsistent phrasing (e.g., *pipline*, *conceptualisation*, long phrases without separators).
-
-Here is a **cleaned-up version** that would fit well in a README or documentation:
-
 ## Contribution to the Research Project
 
 **Anna Shvets**
