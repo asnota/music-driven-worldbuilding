@@ -19,7 +19,7 @@ The repository includes:
 
 # Project Overview
 
-The goal of this project is to explore how **generative multimodeal AI can be used to produce immersive virtual environments from multimodal inputs**.
+The goal of this project is to explore how **generative multimodal AI can be used to produce immersive virtual environments from multimodal inputs**.
 
 The system generates **HDR panoramic environments (.hdr)** and **music audio files (.wav)** which can then be imported into **Unreal Engine**. The generated HDRI can then be with the **HDRIBackdrop plugin** to create atmospheric VR spaces, while generated music audio can be mapped to audio-reactive Niagara system, translating audio properties into motion patterns and colour.
 
