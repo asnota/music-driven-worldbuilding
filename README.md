@@ -105,76 +105,47 @@ Documentation:
 
 ---
 
-## 1. Install uv
+# Setup & Usage
 
-Run in **PowerShell**:
+## Prerequisites
 
+- **Git** installed and available on PATH
+- **Windows** with an NVIDIA GPU + CUDA 12.8 compatible drivers (for the PyTorch CUDA build)
+
+## 1. Clone the repository
+
+```bash
+git clone https://github.com/asnota/music-driven-worldbuilding
+cd music-driven-worldbuilding
 ```
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
+## 2. Run the setup script
 
----
+From **Command Prompt (cmd)**, run:
 
-## 2. Install Python 3.11
-
-```
-uv python install 3.11
-uv python pin 3.11
-```
-
----
-
-## 3. Create the Project
-
-```
-uv init hdri-app
-cd hdri-app
+```bash
+setup.bat
 ```
 
----
+This will automatically:
 
-## 4. Initialize Environment
+- Install [uv](https://docs.astral.sh/uv/) (if not already installed)
+- Install and pin **Python 3.11**
+- Create the `.venv` virtual environment and install all dependencies from `pyproject.toml` (`uv sync`)
+- Install the **PyTorch CUDA build** and training utilities (`tensorboardX`, `pytorch_lightning`)
 
-Run the application once to initialize the virtual environment:
+When it finishes, the environment is activated and ready.
 
+> **Note:** If `uv` was just installed for the first time, you may need to open a **new** terminal before re-running `setup.bat` so that `uv` is available on your PATH.
+
+## 3. Run inference
+
+Activate the `flask-app` virtual environment and start the Flask app:
+
+```bash
+cd flask-app
+.venv\Scripts\activate
+uv run app.py
 ```
-uv run main.py
-```
-
----
-
-# Install Dependencies
-
-## PyTorch (CUDA build)
-
-```
-uv pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
-```
-
----
-
-## Core Dependencies
-
-```
-uv add flask psutil scipy diffusers==0.34.0 transformers==4.28.0
-```
-
----
-
-## Additional Libraries
-
-```
-uv add opencv-python faiss-cpu omegaconf openexr setuptools==81 termcolor einops ftfy
-```
-
----
-
-## Training / Logging Utilities
-
-```
-uv pip install tensorboardX pytorch_lightning
-```
-
 ---
 
 # Running the Flask Application
