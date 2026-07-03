@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDRI Generator - AI Creation Toolkit</title>
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --primary-hover: #4f46e5;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .form-section, .result-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .form-section {
+            animation-delay: 0.2s;
+        }
+
+        .result-section {
+            animation-delay: 0.4s;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .alert-error {
+            background: #fef2f2;
+            color: var(--error-color);
+            border: 1px solid #fecaca;
+        }
+
+        .alert-success {
+            background: #ecfdf5;
+            color: var(--success-color);
+            border: 1px solid #a7f3d0;
+        }
+
+        .image-result {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-result img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .image-result img:hover {
+            transform: scale(1.05);
+        }
+
+        .metrics {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .metrics h3 {
+            color: var(--text-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .metrics pre {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border: 1px solid var(--border-color);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tips {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 0.8s ease-out;
+            animation-delay: 0.6s;
+        }
+
+        .tips h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .tips ul {
+            color: rgba(255, 255, 255, 0.8);
+            padding-left: 20px;
+        }
+
+        .tips li {
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-btn">← Back to Home</a>
+        
+        <header class="header">
+            <h1>🌅 HDRI Generator</h1>
+            <p>High-quality HDRI environment map generation based on Text2Light technology</p>
+        </header>
+
+        <div class="main-content">
+            <div class="form-section">
+                <h2 class="section-title">
+                    <span>⚙️</span>
+                    Generation Configuration
+                </h2>
+                
+                <form method="POST" action="/hdri/generate" id="hdriForm">
+                    <div class="form-group">
+                        <label for="prompt">Text Prompt *</label>
+                        <textarea id="prompt" name="prompt" placeholder="Describe the environment you want to generate, e.g., a beach at sunset, a forest in the snowy mountains, a city nightscape, etc..." required>{{ form_data.prompt if form_data else '' }}</textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="top_k">Top-K Sampling (1-500)</label>
+                            <input type="number" id="top_k" name="top_k" min="1" max="500" value="{{ form_data.top_k if form_data else '100' }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="temperature">Temperature (0.1-2.0)</label>
+                            <input type="number" id="temperature" name="temperature" min="0.1" max="2.0" step="0.1" value="{{ form_data.temperature if form_data else '1.0' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="batch_size">Batch Size (1-4)</label>
+                            <input type="number" id="batch_size" name="batch_size" min="1" max="4" value="{{ form_data.batch_size if form_data else '1' }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sr_factor">Super-Resolution Factor (1-8)</label>
+                            <input type="number" id="sr_factor" name="sr_factor" min="1" max="8" value="{{ form_data.sr_factor if form_data else '4' }}">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="generateBtn">
+                        🚀 Start Generating
+                    </button>
+                </form>
+            </div>
+
+            <div class="result-section">
+                <h2 class="section-title">
+                    <span>🎨</span>
+                    Generation Result
+                </h2>
+
+                {% if error_message %}
+                    <div class="alert alert-error">
+                        {{ error_message }}
+                    </div>
+                {% endif %}
+
+                {% if generated_image_urls %}
+                    <div class="alert alert-success">
+                        ✅ HDRI generated successfully!
+                    </div>
+                    
+                    {% for url in generated_image_urls %}
+                        <div class="image-result">
+                            <img src="{{ url }}" alt="Generated HDRI" onclick="window.open(this.src, '_blank')">
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% if metrics_summary %}
+                    <div class="metrics">
+                        <h3>📊 Generation Metrics</h3>
+                        <pre>{{ metrics_summary }}</pre>
+                    </div>
+                {% endif %}
+
+                <div class="loading" id="loadingDiv">
+                    <div class="spinner"></div>
+                    <p>Generating HDRI, please wait...</p>
+                </div>
+
+                {% if not generated_image_urls and not error_message %}
+                    <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                        <p>💡 Enter a description on the left and click the generate button to start creating</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="tips">
+            <h3>💡 Usage Tips</h3>
+            <ul>
+                <li><strong>Top-K Sampling:</strong> Smaller values produce more stable results, larger values increase diversity</li>
+                <li><strong>Temperature:</strong> Controls the randomness of the generation; lower values produce more conservative results</li>
+                <li><strong>Batch Size:</strong> The number of images generated at once; increasing it improves diversity but consumes more resources</li>
+                <li><strong>Super-Resolution:</strong> Increases the resolution of the output image but adds to the processing time</li>
+                <li><strong>Prompting Tips:</strong> Use specific environmental descriptions, including lighting, weather, time of day, etc.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('hdriForm').addEventListener('submit', function(e) {
+            const btn = document.getElementById('generateBtn');
+            const loading = document.getElementById('loadingDiv');
+            
+            btn.disabled = true;
+            btn.innerHTML = '⏳ Generating...';
+            loading.classList.add('active');
+        });
+
+        // Click image to preview larger version
+        document.querySelectorAll('.image-result img').forEach(img => {
+            img.style.cursor = 'pointer';
+            img.title = 'Click to view larger image';
+        });
+    </script>
+</body>
+</html>
