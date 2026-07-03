@@ -156,7 +156,7 @@ Once dependencies are installed:
 uv run app.py
 ```
 
-The Flask service will start locally and will be available at port 500: .
+The Flask service will start locally and will be available at port 5000: .
 
 Generated **.hdr panoramic environment maps** will be stored into `generated_panorama_web`. 
 Generated **.wave music files** will be available in `generated_music` folder inside flask-app.
