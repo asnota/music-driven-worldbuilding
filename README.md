@@ -1,276 +1,13 @@
 # Music-Driven Worldbuilding: Audio-Reactive HDRI Generation for VR
 
-This repository contains the prototype implementation supporting the research paper:
-
-**“Music-Driven Worldbuilding: Audio-Reactive VR Environments Using Multimodal Generative AI”**
-
-Accepted for presentation at **EVA London 2026 (Electronic Visualisation and the Arts Conference)**.
-
-The project demonstrates a workflow where **AI-generated HDRI environments and music** can be created and integrated into **Unreal Engine 5 VR scenes**, enabling experimental **audio-reactive worldbuilding pipelines**.
-
-The repository includes:
-
-* A **Python/Flask HDRI generation service**
-* A **Diffusion-based music audio generative pipeline**
-* Integration instructions for **Unreal Engine HDRI environments**
-* A **GPU-accelerated workflow using CUDA + PyTorch**
-
----
-
-# Project Overview
-
-The goal of this project is to explore how **generative multimodal AI can be used to produce immersive virtual environments from multimodal inputs**.
-
-The system generates **HDR panoramic environments (.hdr)** and **music audio files (.wav)** which can then be imported into **Unreal Engine**. The generated HDRI can then be with the **HDRIBackdrop plugin** to create atmospheric VR spaces, while generated music audio can be mapped to audio-reactive Niagara system, translating audio properties into motion patterns and colour.
-
-Potential applications include:
-
-* AI-assisted **worldbuilding**
-* **music-responsive virtual environments**
-* creative tools for **artists and musicians**
-
----
-
-# System Architecture
-
-Pipeline overview:
-
-```
-Input (music / prompt / parameters)
-        ↓
-Flask Application
-        ↓
-Music Generation (.wav)
-        ↓
-HDRI Image Generation (.hdr)
-        ↓
-Unreal Engine 5
-        ↓
-VR Scene with HDRIBackdrop and Niagara system
-```
-
----
-
-# Requirements
-
-## Hardware
-
-Recommended:
-
-* NVIDIA GPU with CUDA support
-* Minimum 8GB VRAM
-
----
-
-## Software
-
-* Python **3.11**
-* CUDA-compatible GPU
-* Unreal Engine **5.4** and higher
-
----
-
-# CUDA Setup
-
-First verify that CUDA is installed.
-
-Open **Command Prompt**:
-
-```
-nvcc --version
-```
-
-If CUDA is missing, install it from:
-
-[https://developer.nvidia.com/cuda-downloads](https://developer.nvidia.com/cuda-downloads)
-
-You can also verify GPU support using:
-
-```
-nvidia-smi
-```
-
-For PyTorch compatibility check:
-
-[https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/)
-
----
-
-# Python Environment Setup (uv)
-
-This project uses **uv** for dependency and environment management.
-
-Documentation:
-[https://docs.astral.sh/uv/](https://docs.astral.sh/uv/)
-
----
-
-# Setup & Usage
-
-## Prerequisites
-
-- **Git** installed and available on PATH
-- **Windows** with an NVIDIA GPU + CUDA 12.8 compatible drivers (for the PyTorch CUDA build)
-
-## 1. Clone the repository
-
-```bash
-git clone https://github.com/asnota/music-driven-worldbuilding
-cd music-driven-worldbuilding
-```
-## 2. Run the setup script
-
-From **Command Prompt (cmd)**, run:
-
-```bash
-setup.bat
-```
-
-This will automatically:
-
-- Install [uv](https://docs.astral.sh/uv/) (if not already installed)
-- Install and pin **Python 3.11**
-- Create the `.venv` virtual environment and install all dependencies from `pyproject.toml` (`uv sync`)
-- Install the **PyTorch CUDA build** and training utilities (`tensorboardX`, `pytorch_lightning`)
-
-When it finishes, the environment is activated and ready.
-
-> **Note:** If `uv` was just installed for the first time, you may need to open a **new** terminal before re-running `setup.bat` so that `uv` is available on your PATH.
-
-## 3. Run inference
-
-Activate the `flask-app` virtual environment and start the Flask app:
-
-```bash
-cd flask-app
-.venv\Scripts\activate
-uv run app.py
-```
----
-
-# Running the Flask Application
-
-Once dependencies are installed:
-
-```
-uv run app.py
-```
-
-The Flask service will start locally and will be available at port 5000: .
-
-Generated **.hdr panoramic environment maps** will be stored into `generated_panorama_web`. 
-Generated **.wave music files** will be available in `generated_music` folder inside flask-app.
-
-
----
-
-# Unreal Engine Integration
-
-Video reference for workflow:
-
-ToDo
-
----
-
-## 1. Open your UE5 project
-
-Launch Unreal Engine and open the target project.
-
----
-
-## 2. Enable HDRIBackdrop Plugin
-
-Navigate to:
-
-```
-Edit → Plugins
-```
-
-Search for:
-
-```
-HDRIBackdrop
-```
-
-Enable the plugin and restart the project. 
-More information on plugin installation: [https://dev.epicgames.com/documentation/en-us/unreal-engine/hdri-backdrop-visualization-tool-in-unreal-engine](https://dev.epicgames.com/documentation/en-us/unreal-engine/hdri-backdrop-visualization-tool-in-unreal-engine)
-
----
-
-## 3. Add HDRIBackdrop Actor
-
-From the top menu:
-
-```
-Place Actors Panel
-```
-
-Search for:
-
-```
-HDRIBackdrop
-```
-
-Drag it into the scene.
-
----
-
-## 4. Import Generated HDRI
-
-Import the generated `.hdr` file into the Unreal project content browser.
-
----
-
-## 5. Assign HDRI to Scene
-
-1. Select the **HDRIBackdrop actor**
-2. In the **Details panel**
-3. Assign the imported `.hdr` file to:
-
-```
-Cubemap
-```
-
----
-
-## 6. Adjust Exposure
-
-Generated HDRI environments may appear **overexposed**.
-
-Adjust:
-
-```
-Intensity
-```
-
-inside the HDRIBackdrop actor settings.
-
----
-
-## 7. Add Audio to the Scene
-
-1. Import an audio file into the UE5 project (`.wav` file).
-2. Drag the audio asset from the UE5 **Content Browser** into the scene.
-3. The Niagara system included in the scene will automatically react to the audio.
-4. Click **Simulate** in the toolbar to preview the audio-reactive effect.
-
----
-
-# Research Context
-
-This prototype supports the research project:
+This repository contains the implementation accompanying the paper:
 
 **Music-Driven Worldbuilding: Audio-Reactive VR Environments Using Multimodal Generative AI**
+Accepted at **EVA London 2026 (Electronic Visualisation and the Arts)**.
 
-Accepted for presentation at:
+The project generates AI-created **HDRI environments (.hdr)** and **music (.wav)** that can be integrated into **Unreal Engine 5** to create audio-reactive VR environments.
 
-**EVA London 2026 — Electronic Visualisation and the Arts**
-
-The work investigates how **AI-generated HDRI environments can serve as building blocks for immersive, music-driven virtual worlds**.
-
----
-
-# Repository Structure
+## Repository Structure
 
 ```
 project-root/
@@ -280,26 +17,181 @@ project-root/
 │   ├── generated_panorama_web/
 │   └── Text2Light/
 │
-├── vr-template/
+├── HDRITemplateApp/
+│   └── Content/
+│       └── Custom/
+│           ├── Blueprints/
+│           ├── HDRIs/
+│           ├── Materials/
+│           ├── Meshes/
+│           ├── Music/
+│           └── Niagara/
 │
 └── README.md
 ```
 
----
+## Requirements
 
-# Future Work
+### Hardware
 
-Planned extensions include:
+* NVIDIA GPU with CUDA support (8 GB VRAM recommended)
 
-* real-time **audio-reactive HDRI generation**
-* integration with **live music input**
-* automated **UE5 pipeline scripting**
-* improved **lighting calibration**
-* **VR interaction tools**
+### Software
 
----
+* Python 3.11
+* Unreal Engine 5.5 or newer
+* CUDA-compatible drivers
 
-# Citation
+You can verify your CUDA installation with:
+
+```bash
+nvcc --version
+```
+
+and GPU availability with:
+
+```bash
+nvidia-smi
+```
+
+## Installation
+
+Clone the repository and cd to it:
+
+```bash
+git clone https://github.com/asnota/music-driven-worldbuilding
+cd music-driven-worldbuilding
+```
+
+Run the setup script:
+
+```bash
+setup.bat
+```
+
+The script automatically:
+
+* installs `uv` (if necessary)
+* installs Python 3.11
+* creates the virtual environment
+* installs all project dependencies
+* installs the CUDA-enabled PyTorch build
+
+If `uv` was installed during setup, open a new terminal before running the project again.
+
+## Running the Flask Application
+
+Activate the virtual environment and start the Flask server:
+
+```bash
+cd flask-app
+.venv\Scripts\activate
+uv run app.py
+```
+
+Generated files are saved to:
+
+* `generated_panorama_web/` – HDRI panoramas (.hdr)
+* `generated_music/` – generated music (.wav)
+
+## Unreal Engine Integration
+
+### 1. Enable HDRIBackdrop
+
+Enable the **HDRIBackdrop** plugin:
+
+```
+Edit → Plugins → HDRIBackdrop
+```
+
+Restart the editor after enabling it.
+
+### 2. Import Generated Assets
+
+Import the generated HDRIs into:
+
+```
+Content/Custom/HDRIs
+```
+
+Import the generated music into:
+
+```
+Content/Custom/Music
+```
+
+You may replace the contents of these folders with assets generated by the Flask application.
+
+### 3. Automatic HDRI Assignment and Audio-Reactive Logic
+
+After importing HDRIs into `Content/Custom/HDRIs` run **Simulate** or **VR Preview** at least once to see your new HDRI.
+
+The BlueuPrint logic automatically assigns the available HDRIs to and array at a runtime and then retrieves each HDRI via array index.
+
+The template controls HDRI switching and audio-reactive effects through:
+
+```
+Content/Custom/Blueprints/BP_MusicNiagara.uasset
+```
+
+By default, the blueprint changes the HDRI in the middle of the music track.
+You can modify this blueprint to:
+
+* use any number of HDRIs
+* change switching timing
+* customise the HDRI transition logic
+* adapt the behaviour to your own music sequence
+
+### 4. Project Assets
+
+The `Custom` folder contains all assets used by the template:
+
+* **Blueprints** – application logic
+* **HDRIs** – generated HDRI environments
+* **Materials**
+* **Meshes**
+* **Music** – generated audio
+* **Niagara** – audio-reactive particle system
+
+Typically, only the **HDRIs** and **Music** folders need to be replaced with newly generated content.
+
+### 5. Niagara Particle Systems
+
+The template includes two audio-reactive Niagara systems:
+
+* `NS_MusicGalaxy.uasset`
+* `NS_MusicAurora.uasset`
+
+Both systems contain custom audio modules that analyse the playing music and map its frequency content to particle colour. Three colour channels can be assigned to the **bass**, **mid**, and **high** frequency bands.
+
+#### NS_MusicAurora.uasset
+
+`NS_MusicAurora` uses the **Audio to Color Spectrum** module. When a particle is spawned, the module captures the dominant audio frequency at that moment and uses it to determine the particle's colour for its lifetime.
+
+The module exposes the following parameters:
+
+* **Bass Exponent**, **Mid Exponent**, **High Exponent** – increase the contribution of a frequency band by decreasing its exponent value.
+* **Color_Saturation_Boost** – adjusts the overall colour intensity.
+
+This system is well suited for creating stable colour gradients that evolve as new particles are spawned.
+
+#### NS_MusicGalaxy.uasset
+
+`NS_MusicGalaxy` uses the **Audio Reactive Particles** module, which updates every frame. Unlike `NS_MusicAurora`, both particle colour and velocity continuously respond to the currently playing audio.
+
+The module exposes the following parameters:
+
+* **Intensity** – controls how strongly the audio amplitude influences particle velocity.
+* **Power** – adjusts the response curve of the velocity effect.
+* **Bass_Range**
+* **Mid_Range**
+* **High_Range**
+
+The range parameters accept values between **0 and 1** and define how the audio spectrum is divided into bass, mid, and high frequency bands for colour assignment.
+
+This system is intended for fully dynamic, continuously evolving audio-reactive particle effects.
+
+## Citation
 
 If you use this repository in academic work, please cite:
 
@@ -313,72 +205,17 @@ If you use this repository in academic work, please cite:
 }
 ```
 
----
+## Acknowledgement
 
-# License
+This project builds upon the original HDRI and music generation framework developed by Qi Li and collaborators:
 
-Research prototype — license to be defined.
+https://github.com/QiLi0703/HDRI-and-music-audio-generation
 
----
+This repository adapts the original implementation by providing:
 
-# Acknowledgement and Original Repository
-
-This repository is a **`uv`-based environment adaptation and experimental extension** of the original project:
-
-**HDRI-and-music-audio-generation**
-[https://github.com/QiLi0703/HDRI-and-music-audio-generation.git](https://github.com/QiLi0703/HDRI-and-music-audio-generation.git)
-
-The original repository provides the core implementation for **HDRI generation driven by music/audio inputs using deep generative models**.
-
-This project adapts the original implementation by:
-
-* migrating the environment setup to **`uv` for modern Python dependency management**
-* providing a **clean reproducible installation pipeline**
-* adding documentation for **Unreal Engine 5 HDRI workflows**
-
-All credit for the **original HDRI generation framework and research implementation** goes to the authors of the original repository.
-
----
-
-## Original Project
-
-If you want to explore the base implementation, please visit:
-
-**QiLi0703 – HDRI and Music Audio Generation**
-
-[https://github.com/QiLi0703/HDRI-and-music-audio-generation](https://github.com/QiLi0703/HDRI-and-music-audio-generation)
-
----
-
-## Why This Adaptation?
-
-The original repository relies on a **traditional Python environment setup**, which can be difficult to reproduce across machines.
-
-This adaptation focuses on:
-
-* **reproducible environments**
-* **modern dependency management with `uv`**
-* easier **GPU configuration**
-* integration with **XR workflows (Unreal Engine)**
-
-## Contribution to the Research Project
-
-**Anna Shvets**
-
-* Idea conceptualisation
-* Project supervision
-* Case study creation with original music composition
-* Article writing
-* Adaptation of the Flask app generative pipeline to `uv`
-* Adaptation of the UE5 project template to HDRIBackdrop
-
-**Qi Li**
-
-* Development of the music generative pipeline for the Flask app
-* Creation of the audio-reactive Niagara system with custom HLSL code translating frequency bands into colour
-* Literature search on generative music and audio
-
-**Huilai Zhao**
-
-* Development of the HDRI generative pipeline for the Flask app
-* Literature search on HDRI generation
+* a reproducible `uv`-based Python environment
+* a simplified installation process
+* integration with an Unreal Engine 5 VR template
+* an automated HDRI assignment workflow for `HDRIBackdrop`
+* an enhanced **Audio Reactive Particles** module with expanded control over particle colour and velocity
+* two custom Niagara systems with custom dynamic materials and meshes
